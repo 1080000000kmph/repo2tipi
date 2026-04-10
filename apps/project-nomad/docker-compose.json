@@ -5,7 +5,7 @@
     {
       "name": "project-nomad",
       "image": "base:latest",
-      "internalPort": 8080,
+      "internalPort": 8800,
       "isMain": true,
       "environment": [
         {
