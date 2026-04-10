@@ -2,14 +2,14 @@
   "id": "project-nomad",
   "name": "Project Nomad",
   "description": "Project N.O.M.A.D, is a self-contained, offline survival computer packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.",
-  "short_desc": "Project N.O.M.A.D, is a self-contained, offline survival computer packed with critical tools, knowle",
+  "short_desc": "Project N.O.M.A.D, is a self-contained, offline survival computer packed with critical tools, knowledge",
   "author": "Crosstalk-Solutions",
   "source": "https://github.com/Crosstalk-Solutions/project-nomad",
   "version": "latest",
   "categories": [
     "utilities"
   ],
-  "port": 8080,
+  "port": 8800,
   "image": "base",
   "supported_architectures": [
     "arm64",
