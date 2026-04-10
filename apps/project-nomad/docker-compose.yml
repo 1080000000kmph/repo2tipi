@@ -4,7 +4,7 @@ services:
     container_name: project-nomad
     restart: unless-stopped
     ports:
-      - ${APP_PORT}:8800
+      - ${APP_PORT}:8880
     environment:
       NODE_ENV: ${NODE_ENV:-production}
     networks:
@@ -12,7 +12,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.middlewares.project-nomad-web-redirect.redirectscheme.scheme: https
-      traefik.http.services.project-nomad.loadbalancer.server.port: "8800"
+      traefik.http.services.project-nomad.loadbalancer.server.port: "8880"
       traefik.http.routers.project-nomad-insecure.rule: Host(`${APP_DOMAIN}`)
       traefik.http.routers.project-nomad-insecure.entrypoints: web
       traefik.http.routers.project-nomad-insecure.service: project-nomad
