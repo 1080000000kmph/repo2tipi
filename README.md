@@ -1,31 +1,141 @@
-# Example App Store Template
+# Runtipi Custom app store: repo2tipi
 
-This repository serves as a template for creating your own custom app store for the Runtipi platform. Use this as a starting point to create and share your own collection of applications.
+App store and automated converter for [Runtipi](https://runtipi.io/) — turning GitHub repositories into deployable Runtipi apps.
+
+### ⚠️ UNDER CONSTRUCTION ⚠️
+
+This repository is ongoing work in progress. - Things may break, move, or disappear without warning.
+
+
+---
+A community-maintained custom app store for Runtipi. Add it to your Runtipi instance to install apps not available in the official store.
+
+## Available Apps
+
+| App | Description | Port | Source |
+|-----|-------------|------|--------|
+| **AzuraCast** | Self-hosted web radio management suite with turnkey installer tools and a modern web UI | 80 | [GitHub](https://github.com/AzuraCast/AzuraCast) |
+| **Project Nomad** | Self-contained offline survival computer with tools, knowledge, and AI | 8080 | [GitHub](https://github.com/Crosstalk-Solutions/project-nomad) |
+| **Web Check** | All-in-one OSINT tool for analysing any website | 3000 | [GitHub](https://github.com/lissy93/web-check) |
+
+## Add to Runtipi
+
+1. Open your Runtipi dashboard
+2. Go to **Settings** → **App Stores**
+3. Add this URL:
+
+```
+https://github.com/1080000000kmph/repo2tipi
+```
+
+4. Save — the apps will appear in your store
 
 ## Repository Structure
 
-- **apps/**: Contains individual app directories
+```
+repo2tipi/
+├── apps/                        # App definitions
+│   ├── azuracast/
+│   │   ├── config.json           # App metadata & form fields
+│   │   ├── docker-compose.yml    # Service definitions (x-runtipi)
+│   │   ├── description.md        # Long-form description
+│   │   ├── logo.jpg              # App icon
+│   │   └── metadata/             # Additional assets
+│   ├── project-nomad/
+│   └── web-check/
+├── scripts/
+│   └── update-config.ts         # Auto-update config on image bumps
+├── __tests__/                   # App validation tests
+├── .github/workflows/           # CI/CD pipelines
+├── renovate.json                # Renovate bot for auto-updates
+├── config.js                    # Allowed CI commands
+└── package.json                 # Dependencies & test runner
+```
 
-  - Each app has its own folder (e.g., `whoami/`) with the following structure:
-    - `config.json`: App configuration file
-    - `docker-compose.json`: Docker setup for the app
-    - `metadata/`: Contains app visuals and descriptions
-      - `description.md`: Markdown description of the app
-      - `logo.jpg`: App logo image
+### Per-App Files
 
-- **tests/**: Contains test files for the app store
+| File | Required | Purpose |
+|------|----------|---------|
+| `config.json` | Yes | App metadata, categories, form fields, version |
+| `docker-compose.yml` | Yes | Service definitions with `x-runtipi` metadata |
+| `description.md` | No | Long-form description shown in the UI |
+| `logo.jpg` / `logo.png` | No | App icon in the store |
 
-  - `apps.test.ts`: Test suite for validating apps
+## Auto-Updates
 
-## Getting Started
+[Renovate Bot](https://docs.renovatebot.com/) watches Docker image tags and creates PRs when updates are available:
 
-This repository is intended to serve as a template for creating your own app store. Follow these steps to get started:
+- Detects new image versions in `docker-compose.yml` files
+- Bumps `tipi_version` in `config.json` automatically
+- Runs validation tests before merging
+- Database images (PostgreSQL, MariaDB, MySQL, MongoDB, Redis) are excluded for stability
 
-1. Click the "Use this template" button to create a new repository based on this template
-2. Customize the apps or add your own app folders in the `apps/` directory
-3. Test your app store by using it with Runtipi
+## Development
 
-## Documentation
+```bash
+git clone https://github.com/1080000000kmph/repo2tipi.git
+cd repo2tipi
+bun install
+bun test          # Validate all apps
+```
 
-For detailed instructions on creating your own app store, please refer to the official guide:
-[Create Your Own App Store Guide](https://runtipi.io/docs/guides/create-your-own-app-store)
+### Add a New App
+
+1. Create a folder under `apps/` with a lowercase hyphenated id
+2. Add `config.json` — [reference](https://runtipi.io/docs/reference/config-json)
+3. Add `docker-compose.yml` with `x-runtipi` — [reference](https://runtipi.io/docs/reference/dynamic-compose)
+4. Add `description.md` and a logo (recommended)
+5. Run `bun test` to validate
+6. Open a Pull Request
+
+---
+
+# Part 2 — Web Converter
+
+**[repo-2-tipi.lovable.app](https://repo-2-tipi.lovable.app/)**
+
+A zero-touch Docker → Runtipi converter built with [Lovable](https://lovable.dev/). Paste any GitHub URL and get a complete, ready-to-deploy Runtipi app package.
+
+## How It Works
+
+1. **Paste** a GitHub repository URL
+2. **Fetch** — The tool scans the repo for Docker Compose files or Dockerfiles
+3. **Analyze** — Parses services, ports, volumes, environment variables, and dependencies
+4. **Generate** — Produces a full Runtipi app package:
+   - `config.json` — App metadata with form fields extracted from env vars
+   - `docker-compose.yml` — Service definitions with `x-runtipi` metadata
+   - `description.md` — App description
+   - `logo.jpg` — App icon (when available)
+5. **Validate** — Output is validated against the Runtipi schema before download
+
+## Smart Detection
+
+The converter searches for Docker Compose files in standard locations:
+
+- `docker-compose.yml` / `docker-compose.yaml`
+- `compose.yml` / `compose.yaml`
+- `docker/docker-compose.yml`
+- `.docker/compose.yml`
+- `deploy/docker-compose.yaml`
+
+If no compose file is found, it falls back to parsing the `Dockerfile` directly — extracting `EXPOSE` ports, `ENV` variables, and the base image.
+
+
+## Contributing
+
+- **Add apps** to the store → Fork, add app folder, validate, PR
+- **Improve the converter** → Use the [web tool](https://repo-2-tipi.lovable.app/) and report issues
+- **Request an app** → Open an issue with the GitHub repo URL
+
+## License
+
+[WTFPL v2](http://www.wtfpl.net/)
+
+## Links
+
+- **App Store Repo:** [github.com/1080000000kmph/repo2tipi](https://github.com/1080000000kmph/repo2tipi)
+- **Web Converter:** [repo-2-tipi.lovable.app](https://repo-2-tipi.lovable.app/)
+- **Runtipi Docs:** [runtipi.io/docs](https://runtipi.io/docs)
+- **Dynamic Compose Reference:** [runtipi.io/docs/reference/dynamic-compose](https://runtipi.io/docs/reference/dynamic-compose)
+- **config.json Reference:** [runtipi.io/docs/reference/config-json](https://runtipi.io/docs/reference/config-json)
+- **Create Your Own App Store:** [runtipi.io/docs/guides/create-your-own-app-store](https://runtipi.io/docs/guides/create-your-own-app-store)
