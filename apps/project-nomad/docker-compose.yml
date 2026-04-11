@@ -1,36 +1,12 @@
 services:
   project-nomad:
-    image: base:latest
+    image: node:22-slim
     container_name: project-nomad
     restart: unless-stopped
-    ports:
-      - ${APP_PORT}:8880
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
-    networks:
-      - tipi_main_network
-    labels:
-      traefik.enable: "true"
-      traefik.http.middlewares.project-nomad-web-redirect.redirectscheme.scheme: https
-      traefik.http.services.project-nomad.loadbalancer.server.port: "8880"
-      traefik.http.routers.project-nomad-insecure.rule: Host(`${APP_DOMAIN}`)
-      traefik.http.routers.project-nomad-insecure.entrypoints: web
-      traefik.http.routers.project-nomad-insecure.service: project-nomad
-      traefik.http.routers.project-nomad-insecure.middlewares: project-nomad-web-redirect
-      traefik.http.routers.project-nomad.rule: Host(`${APP_DOMAIN}`)
-      traefik.http.routers.project-nomad.entrypoints: websecure
-      traefik.http.routers.project-nomad.service: project-nomad
-      traefik.http.routers.project-nomad.tls.certresolver: myresolver
-      traefik.http.routers.project-nomad-local-insecure.rule: Host(`project-nomad.${LOCAL_DOMAIN}`)
-      traefik.http.routers.project-nomad-local-insecure.entrypoints: web
-      traefik.http.routers.project-nomad-local-insecure.service: project-nomad
-      traefik.http.routers.project-nomad-local-insecure.middlewares: project-nomad-web-redirect
-      traefik.http.routers.project-nomad-local.rule: Host(`project-nomad.${LOCAL_DOMAIN}`)
-      traefik.http.routers.project-nomad-local.entrypoints: websecure
-      traefik.http.routers.project-nomad-local.service: project-nomad
-      traefik.http.routers.project-nomad-local.tls: "true"
-      runtipi.managed: "true"
-networks:
-  tipi_main_network:
-    name: runtipi_tipi_main_network
-    external: true
+      - NODE_ENV=${NODE_ENV:-production}
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
+x-runtipi:
+  schema_version: 2
