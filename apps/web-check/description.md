@@ -10,39 +10,6 @@ All-in-one OSINT tool for analysing any website
 </p>
 
 ---
-<p>
-  <sup>Kindly supported by:</sup><br>
-<a href="https://terminaltrove.com/?utm_campaign=github&utm_medium=referral&utm_content=web-check&utm_source=wcgh">
-  <img src="https://pixelflare.cc/alicia/sponsors/terminal-trove" width="300" alt="Terminal Trove">
-  <br>
-  <strong>The $HOME of all things in the terminal.</strong>
-</a>
-<br>
-<a href="https://terminaltrove.com/newsletter?utm_campaign=github&utm_medium=referral&utm_content=web-check&utm_source=wcgh">
-  <sub>Find your next CLI / TUI tool and more at Terminal Trove,</sub>
-  <br>
-  <sup>Get updates on new tools on our newsletter.</sup>
-</a>
-</p>
-
-<p align="center">
-	<sup>Kindly supported by:</sup><br>
-	<a href="https://go.warp.dev/web-check"><b>Warp</b>, built for coding with multiple AI agents</a><br><br>
-	<a href="https://go.warp.dev/web-check"><img width="640" src="https://github.com/warpdotdev/brand-assets/blob/main/Github/Sponsor/Warp-Github-LG-02.png?raw=true" /></a>
-</p>
-
----
-
-#### Contents
-
-- **[About](#about)**
-  - [Screenshot](#screenshot)
-  - [Live Demo](#live-demo)
-  - [Mirror](#mirror)
-  - [Features](#features)
-- **[Usage](#usage)**
-  - [Deployment](#deployment)
-
 ---
 
 ## About
@@ -70,16 +37,6 @@ A hosted version can be accessed at: **[web-check.as93.net](https://web-check.as
 The source for this repo is mirrored to CodeBerg, available at: **[codeberg.org/alicia/web-check](https://codeberg.org/alicia/web-check)**
 
 ### Status
-
-
-Build & Deploys: [![Netlify Status](https://api.netlify.com/api/v1/badges/c43453c1-5333-4df7-889b-c1d2b52183c0/deploy-status)](https://app.netlify.com/sites/web-check/deploys)
-[![Vercel Status](https://therealsujitk-vercel-badge.vercel.app/?app=web-check-ten)](https://vercel.com/as93/web-check/)
-[![🐳 Build + Publish Docker Image](https://github.com/Lissy93/web-check/actions/workflows/docker.yml/badge.svg)](https://github.com/Lissy93/web-check/actions/workflows/docker.yml)
-[![🚀 Deploy to AWS](https://github.com/Lissy93/web-check/actions/workflows/deploy-aws.yml/badge.svg)](https://github.com/Lissy93/web-check/actions/workflows/deploy-aws.yml)
-<br />
-Repo Management & Miscellaneous: [![🪞 Mirror to Codeberg](https://github.com/Lissy93/web-check/actions/workflows/mirror.yml/badge.svg)](https://github.com/Lissy93/web-check/actions/workflows/mirror.yml)
-[![💓 Inserts Contributors & Sponsors](https://github.com/Lissy93/web-check/actions/workflows/credits.yml/badge.svg)](https://github.com/Lissy93/web-check/actions/workflows/credits.yml)
-
 
 ### Features
 
