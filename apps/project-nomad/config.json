@@ -5,7 +5,7 @@
   "description": "Project N.O.M.A.D, is a self-contained, offline survival computer packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.",
   "version": "22-slim",
   "image": "node",
-  "port": 8080,
+  "port": 8104,
   "categories": [
     "utilities"
   ],
@@ -30,6 +30,6 @@
   "dynamic_config": true,
   "tipi_version": 1,
   "min_tipi_version": "4.5.0",
-  "created_at": 1775927516017,
-  "updated_at": 1775927516017
+  "created_at": 1776016449785,
+  "updated_at": 1776016449785
 }
